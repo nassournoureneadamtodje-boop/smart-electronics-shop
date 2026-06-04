@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart - Smart Electronics Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Shopping Cart</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="cart.html">Cart</a>
+  <a href="checkout.html">Checkout</a>
+</nav>
+
+<div class="container">
+  <h2>Your Cart</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="cart-items"></tbody>
+  </table>
+
+  <h2>Total: <span id="cart-total">0 RWF</span></h2>
+  <a href="checkout.html" class="btn">Proceed to Checkout</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Smart Electronics Shop</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

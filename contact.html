@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us - Smart Electronics Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Contact Us</h1>
+  <p>We are ready to help you with products, orders, and delivery</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
+  <a href="checkout.html">Checkout</a>
+</nav>
+
+<div class="container">
+  <h2>Contact Information</h2>
+
+  <div class="features">
+    <div class="feature-box">
+      <h3>📍 Location</h3>
+      <p>Kigali, Rwanda</p>
+    </div>
+
+   <div class="feature-box">
+  <h3>📞 Phone</h3>
+  <p>+250 780 000 000</p>
+</div>
+
+<div class="feature-box">
+  <h3>✉️ Email</h3>
+  <p>info@smartelectronics.rw</p>
+</div>
+
+    <div class="feature-box">
+      <h3>🕒 Working Hours</h3>
+      <p>Monday - Saturday<br>8:00 AM - 6:00 PM</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Send Us a Message</h2>
+
+  <form onsubmit="alert('Message sent successfully!'); return false;">
+    <label>Full Name</label>
+    <input type="text" placeholder="Enter your full name" required>
+
+    <label>Email Address</label>
+    <input type="email" placeholder="Enter your email address" required>
+
+    <label>Phone Number</label>
+    <input type="text" placeholder="+250 7XX XXX XXX" required>
+
+    <label>Subject</label>
+    <input type="text" placeholder="Enter message subject" required>
+
+    <label>Message</label>
+    <textarea placeholder="Write your message here..." required></textarea>
+
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</div>
+
+<footer>
+  <p><strong>Smart Electronics Shop</strong></p>
+  <p>Kigali, Rwanda | Phone: +250 780 000 000 | Email: info@smartelectronics.rw</p>
+  <p>&copy; 2026 Smart Electronics Shop</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

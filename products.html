@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products - Smart Electronics Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Our Products</h1>
+  <p>Browse our latest electronics products</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
+  <a href="checkout.html">Checkout</a>
+</nav>
+
+<div class="container">
+  <h2>Product Listing</h2>
+
+  <div class="filter-box">
+    <input type="text" id="searchInput" placeholder="Search product..." onkeyup="filterProducts()">
+
+    <select id="categoryFilter" onchange="filterProducts()">
+      <option value="All">All Categories</option>
+      <option value="Audio">Audio</option>
+      <option value="Wearables">Wearables</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Phones">Phones</option>
+      <option value="Storage">Storage</option>
+      <option value="Power">Power</option>
+    </select>
+  </div>
+
+  <div id="product-list" class="products"></div>
+</div>
+
+<footer>
+  <p><strong>Smart Electronics Shop</strong></p>
+  <p>Kigali, Rwanda | Online Electronics Store</p>
+  <p>&copy; 2026 Smart Electronics Shop</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
