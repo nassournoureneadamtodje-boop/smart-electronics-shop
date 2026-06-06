@@ -1,6 +1,9 @@
+require("dotenv").config();
+
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -74,6 +77,52 @@ db.serialize(() => {
   });
 });
 
+function sendOrderEmail(order, orderId) {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.log("Email not configured. Order saved only.");
+    return;
+  }
+
+  const itemsText = order.items.map(item => {
+    return `${item.name} x ${item.quantity} = ${item.price * item.quantity} RWF`;
+  }).join("\n");
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  const emailMessage = `
+NEW ORDER RECEIVED
+
+Order ID: ${orderId}
+
+Customer Details:
+Name: ${order.customer_name}
+Phone: ${order.phone}
+Email: ${order.email}
+Address: ${order.address}
+Payment Method: ${order.payment_method}
+
+Order Items:
+${itemsText}
+
+Total Amount: ${order.total} RWF
+`;
+
+  transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: "todjenassournourene@gmail.com",
+    subject: `New Order #${orderId} - Smart Electronics Shop`,
+    text: emailMessage
+  }).catch(error => {
+    console.log("Email sending failed:", error.message);
+  });
+}
+
 app.get("/api/products", (req, res) => {
   db.all("SELECT * FROM products", [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -95,13 +144,25 @@ app.post("/api/orders", (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+  const order = {
+    customer_name,
+    phone,
+    email,
+    address,
+    payment_method,
+    items,
+    total
+  };
+
   db.run(
-    `INSERT INTO orders 
-    (customer_name, phone, email, address, payment_method, items, total) 
+    `INSERT INTO orders
+    (customer_name, phone, email, address, payment_method, items, total)
     VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [customer_name, phone, email, address, payment_method, JSON.stringify(items), total],
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
+
+      sendOrderEmail(order, this.lastID);
 
       res.json({
         message: "Order placed successfully",
