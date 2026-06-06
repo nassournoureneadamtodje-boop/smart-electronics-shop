@@ -57,7 +57,7 @@ function displayProducts(products) {
       <p>${product.description}</p>
       <p class="stock">Available in Stock</p>
       <p class="price">${product.price} RWF</p>
-      <button class="btn" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+      <button class="btn" onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})">
         Add to Cart
       </button>
     </div>
@@ -67,6 +67,8 @@ function displayProducts(products) {
 function filterProducts() {
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
+
+  if (!searchInput || !categoryFilter) return;
 
   const search = searchInput.value.toLowerCase();
   const category = categoryFilter.value;
@@ -111,7 +113,7 @@ function loadCart() {
           <input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)">
         </td>
         <td>${subtotal} RWF</td>
-        <td><button class="btn" onclick="removeItem(${index})">Remove</button></td>
+        <td><button class="btn danger" onclick="removeItem(${index})">Remove</button></td>
       </tr>
     `;
   }).join("");
@@ -154,7 +156,7 @@ function loadCheckoutSummary() {
     const subtotal = item.price * item.quantity;
     total += subtotal;
 
-    return `<p>${item.name} x ${item.quantity} = ${subtotal} RWF</p>`;
+    return `<p><strong>${item.name}</strong> x ${item.quantity} = ${subtotal} RWF</p>`;
   }).join("");
 
   totalBox.innerText = total + " RWF";
@@ -175,7 +177,9 @@ async function checkout(event) {
   const order = {
     customer_name: document.getElementById("name").value,
     phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
     address: document.getElementById("address").value,
+    payment_method: document.getElementById("payment").value,
     items: cart,
     total: total
   };
@@ -191,8 +195,9 @@ async function checkout(event) {
   const result = await response.json();
 
   if (response.ok) {
-    localStorage.removeItem("cart");
     localStorage.setItem("orderId", result.orderId);
+    localStorage.setItem("lastOrder", JSON.stringify(order));
+    localStorage.removeItem("cart");
     window.location.href = "confirmation.html";
   } else {
     alert(result.error);
@@ -207,11 +212,77 @@ function showOrderId() {
   orderIdBox.innerText = orderId;
 }
 
+function showFinalOrderDetails() {
+  const box = document.getElementById("final-order-details");
+  if (!box) return;
+
+  const order = JSON.parse(localStorage.getItem("lastOrder")) || null;
+
+  if (!order) {
+    box.innerHTML = "<p>No order details found.</p>";
+    return;
+  }
+
+  const items = order.items.map(item => {
+    return `<p>${item.name} x ${item.quantity} = ${item.price * item.quantity} RWF</p>`;
+  }).join("");
+
+  box.innerHTML = `
+    <p><strong>Customer:</strong> ${order.customer_name}</p>
+    <p><strong>Phone:</strong> ${order.phone}</p>
+    <p><strong>Email:</strong> ${order.email}</p>
+    <p><strong>Address:</strong> ${order.address}</p>
+    <p><strong>Payment Method:</strong> ${order.payment_method}</p>
+    <h3>Items Ordered</h3>
+    ${items}
+    <h3>Total: ${order.total} RWF</h3>
+  `;
+}
+async function loadDashboard() {
+  const totalProductsBox = document.getElementById("total-products");
+  if (!totalProductsBox) return;
+
+  const productResponse = await fetch(`${API_URL}/products`);
+  const products = await productResponse.json();
+
+  const orderResponse = await fetch(`${API_URL}/orders`);
+  const orders = await orderResponse.json();
+
+  const categories = [...new Set(products.map(p => p.category))];
+
+  document.getElementById("total-products").innerText = products.length;
+  document.getElementById("total-categories").innerText = categories.length;
+  document.getElementById("total-orders").innerText = orders.length;
+
+  const totalSales = orders.reduce((sum, order) => sum + Number(order.total), 0);
+  document.getElementById("total-sales").innerText = totalSales + " RWF";
+
+  document.getElementById("category-summary").innerHTML = categories.map(category => {
+    const count = products.filter(p => p.category === category).length;
+    return `<p><strong>${category}:</strong> ${count} products</p>`;
+  }).join("");
+
+  document.getElementById("recent-orders").innerHTML = orders.length === 0
+    ? "<p>No orders yet.</p>"
+    : orders.slice(0, 5).map(order => `
+      <div class="order-card">
+        <p><strong>Order #${order.id}</strong></p>
+        <p>Customer: ${order.customer_name}</p>
+        <p>Phone: ${order.phone}</p>
+        <p>Email: ${order.email}</p>
+        <p>Payment: ${order.payment_method}</p>
+        <p>Total: ${order.total} RWF</p>
+      </div>
+    `).join("");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   loadCart();
   loadCheckoutSummary();
   showOrderId();
+  showFinalOrderDetails();
+  loadDashboard();
   updateCartCount();
 
   const form = document.getElementById("checkout-form");

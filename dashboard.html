@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analytics Dashboard - Smart Electronics Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Analytics Dashboard</h1>
+  <p>Business performance, product categories, and recent customer orders</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
+  <a href="checkout.html">Checkout</a>
+</nav>
+
+<div class="container">
+  <h2>Store Performance Overview</h2>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <span class="dashboard-icon">📦</span>
+      <h3>Total Products</h3>
+      <p id="total-products">0</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span class="dashboard-icon">🗂️</span>
+      <h3>Categories</h3>
+      <p id="total-categories">0</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span class="dashboard-icon">🧾</span>
+      <h3>Total Orders</h3>
+      <p id="total-orders">0</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span class="dashboard-icon">💰</span>
+      <h3>Total Sales</h3>
+      <p id="total-sales">0 RWF</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Product Category Summary</h2>
+  <div class="category-grid" id="category-summary"></div>
+</div>
+
+<div class="container">
+  <h2>Recent Orders</h2>
+  <div class="orders-grid" id="recent-orders"></div>
+</div>
+
+<footer>
+  <p><strong>Smart Electronics Shop</strong></p>
+  <p>Kigali, Rwanda | Phone: 0793226597 | Email: todjenassournourene@gmail.com</p>
+  <p>&copy; 2026 Smart Electronics Shop</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
