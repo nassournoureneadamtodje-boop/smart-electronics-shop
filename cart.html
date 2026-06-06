@@ -8,12 +8,13 @@
 
 <header>
   <h1>Shopping Cart</h1>
+  <p>Review your selected products before checkout</p>
 </header>
 
 <nav>
   <a href="index.html">Home</a>
   <a href="products.html">Products</a>
-  <a href="cart.html">Cart</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
   <a href="checkout.html">Checkout</a>
 </nav>
 
@@ -33,8 +34,11 @@
     <tbody id="cart-items"></tbody>
   </table>
 
-  <h2>Total: <span id="cart-total">0 RWF</span></h2>
-  <a href="checkout.html" class="btn">Proceed to Checkout</a>
+  <div class="summary-box">
+    <h2>Total: <span id="cart-total">0 RWF</span></h2>
+    <a href="products.html" class="btn">Continue Shopping</a>
+    <a href="checkout.html" class="btn">Proceed to Checkout</a>
+  </div>
 </div>
 
 <footer>

@@ -8,27 +8,42 @@
 
 <header>
   <h1>Checkout</h1>
+  <p>Enter your delivery information</p>
 </header>
 
 <nav>
   <a href="index.html">Home</a>
   <a href="products.html">Products</a>
-  <a href="cart.html">Cart</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
   <a href="checkout.html">Checkout</a>
 </nav>
 
 <div class="container">
+  <h2>Order Summary</h2>
+
+  <div class="summary-box">
+    <div id="order-summary"></div>
+    <h3>Total: <span id="checkout-total">0 RWF</span></h3>
+  </div>
+
   <h2>Customer Details</h2>
 
   <form id="checkout-form">
     <label>Full Name</label>
-    <input type="text" id="name" required>
+    <input type="text" id="name" placeholder="Enter your full name" required>
 
     <label>Phone Number</label>
-    <input type="text" id="phone" required>
+    <input type="text" id="phone" placeholder="+250 7XX XXX XXX" required>
 
-    <label>Address</label>
-    <textarea id="address" required></textarea>
+    <label>Delivery Address</label>
+    <textarea id="address" placeholder="Enter your delivery address" required></textarea>
+
+    <label>Payment Method</label>
+    <select required>
+      <option>Pay on Delivery</option>
+      <option>Mobile Money</option>
+      <option>Bank Transfer</option>
+    </select>
 
     <button type="submit" class="btn">Place Order</button>
   </form>

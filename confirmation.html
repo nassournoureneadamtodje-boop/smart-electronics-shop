@@ -8,24 +8,27 @@
 
 <header>
   <h1>Order Confirmation</h1>
+  <p>Your purchase has been received</p>
 </header>
 
 <nav>
   <a href="index.html">Home</a>
   <a href="products.html">Products</a>
-  <a href="cart.html">Cart</a>
+  <a href="cart.html">Cart <span id="cart-count">0</span></a>
 </nav>
 
-<div class="hero">
+<section class="hero">
   <h1>Thank You!</h1>
   <p>Your order has been placed successfully.</p>
-  <p>We will contact you soon for delivery confirmation.</p>
+  <p>Order Number: <strong>#<span id="order-id">N/A</span></strong></p>
+  <p>Our team will contact you soon for delivery confirmation.</p>
   <a href="products.html" class="btn">Continue Shopping</a>
-</div>
+</section>
 
 <footer>
   <p>&copy; 2026 Smart Electronics Shop</p>
 </footer>
 
+<script src="app.js"></script>
 </body>
 </html>
