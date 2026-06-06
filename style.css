@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
+:root {
+  --dark: #111827;
+  --dark-soft: #1f2937;
+  --gold: #c27803;
+  --gold-dark: #92400e;
+  --cream: #f8f5f0;
+  --light-gold: #fff7ed;
+  --white: #ffffff;
+  --gray: #4b5563;
+  --green: #15803d;
+  --red: #dc2626;
+  --border: #eadcc8;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,20 +22,20 @@
 }
 
 body {
-  background: #f8f5f0;
-  color: #1f2933;
+  background: var(--cream);
+  color: var(--dark);
   font-family: "Poppins", Arial, sans-serif;
 }
 
 header {
-  background: linear-gradient(135deg, #1f2933, #c27803);
-  color: white;
-  padding: 34px 20px;
+  background: linear-gradient(135deg, var(--dark), var(--gold));
+  color: var(--white);
+  padding: 36px 20px;
   text-align: center;
 }
 
 header h1 {
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 800;
 }
 
@@ -30,17 +45,17 @@ header p {
 }
 
 nav {
-  background: #ffffff;
+  background: var(--white);
   padding: 16px 10px;
   text-align: center;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 nav a {
-  color: #1f2933;
+  color: var(--dark);
   text-decoration: none;
   margin: 8px 12px;
   font-weight: 600;
@@ -48,11 +63,11 @@ nav a {
 }
 
 nav a:hover {
-  color: #c27803;
+  color: var(--gold);
 }
 
 #cart-count {
-  background: #c27803;
+  background: var(--gold);
   color: white;
   padding: 3px 8px;
   border-radius: 20px;
@@ -61,7 +76,7 @@ nav a:hover {
 
 .hero {
   background:
-    linear-gradient(120deg, rgba(31, 41, 51, 0.88), rgba(194, 120, 3, 0.75)),
+    linear-gradient(120deg, rgba(17, 24, 39, 0.88), rgba(194, 120, 3, 0.72)),
     url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3");
   background-size: cover;
   background-position: center;
@@ -71,16 +86,17 @@ nav a:hover {
 }
 
 .hero h1 {
-  font-size: 50px;
+  font-size: 52px;
   font-weight: 800;
   margin-bottom: 15px;
 }
 
 .hero p {
-  max-width: 720px;
+  max-width: 750px;
   margin: 0 auto 25px;
   font-size: 19px;
   color: #fff7ed;
+  line-height: 1.7;
 }
 
 .container {
@@ -92,42 +108,58 @@ nav a:hover {
 .container h2 {
   font-size: 30px;
   text-align: center;
-  color: #1f2933;
-  margin-bottom: 26px;
+  color: var(--dark);
+  margin-bottom: 28px;
 }
 
 .features,
-.products {
+.products,
+.dashboard-grid,
+.category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
   gap: 24px;
+}
+
+.features,
+.products,
+.dashboard-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.category-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }
 
 .feature-box,
 .summary-box,
 form,
-.card {
-  background: white;
+.card,
+.dashboard-card,
+.order-card {
+  background: var(--white);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #eadcc8;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
-.feature-box {
-  padding: 26px;
+.feature-box,
+.dashboard-card {
+  padding: 28px;
   text-align: center;
 }
 
-.feature-box h3 {
-  color: #9a5b00;
+.feature-box h3,
+.dashboard-card h3 {
+  color: var(--gold-dark);
   font-size: 22px;
   margin-bottom: 10px;
 }
 
 .feature-box p,
 .card p,
-.summary-box p {
-  color: #4b5563;
+.summary-box p,
+.order-card p {
+  color: var(--gray);
   line-height: 1.7;
 }
 
@@ -136,19 +168,20 @@ form,
   transition: 0.25s;
 }
 
-.card:hover {
+.card:hover,
+.dashboard-card:hover {
   transform: translateY(-7px);
 }
 
 .card img {
   width: 100%;
-  height: 210px;
+  height: 215px;
   object-fit: cover;
 }
 
 .card h3 {
   padding: 18px 20px 4px;
-  color: #1f2933;
+  color: var(--dark);
   font-size: 21px;
 }
 
@@ -163,18 +196,18 @@ form,
 }
 
 .price {
-  color: #15803d !important;
+  color: var(--green) !important;
   font-size: 20px;
   font-weight: 800;
 }
 
 .stock {
-  color: #c27803 !important;
+  color: var(--gold) !important;
   font-weight: 700;
 }
 
 .btn {
-  background: #c27803;
+  background: var(--gold);
   color: white;
   padding: 13px 22px;
   border: none;
@@ -187,12 +220,12 @@ form,
 }
 
 .btn:hover {
-  background: #9a5b00;
+  background: var(--gold-dark);
   transform: translateY(-2px);
 }
 
 .btn.danger {
-  background: #dc2626;
+  background: var(--red);
 }
 
 .filter-box {
@@ -212,35 +245,67 @@ select {
   font-size: 15px;
   outline: none;
   margin: 8px 0 16px;
-  background: #fff;
+  background: white;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #c27803;
+  border-color: var(--gold);
   box-shadow: 0 0 0 4px rgba(194, 120, 3, 0.15);
 }
 
 form {
-  padding: 25px;
+  padding: 26px;
 }
 
 form label {
   font-weight: 700;
-  color: #1f2933;
+  color: var(--dark);
 }
 
 .summary-box {
   padding: 24px;
 }
 
+.dashboard-icon {
+  font-size: 38px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.category-grid p {
+  background: var(--light-gold);
+  padding: 16px;
+  border-radius: 14px;
+  border-left: 5px solid var(--gold);
+  font-weight: 600;
+  text-align: center;
+}
+
+.orders-grid {
+  display: grid;
+  gap: 16px;
+}
+
 .order-card {
-  background: #fff7ed;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  border-left: 5px solid #c27803;
+  background: var(--light-gold);
+  padding: 18px;
+  border-left: 5px solid var(--gold);
+}
+
+.order-card p {
+  margin: 6px 0;
+}
+
+.order-card strong {
+  color: var(--dark);
 }
 
 table {
@@ -249,23 +314,23 @@ table {
   border-collapse: collapse;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
 }
 
 th {
-  background: #1f2933;
+  background: var(--dark);
   color: white;
 }
 
 th,
 td {
   padding: 15px;
-  border-bottom: 1px solid #eadcc8;
+  border-bottom: 1px solid var(--border);
   text-align: center;
 }
 
 footer {
-  background: #1f2933;
+  background: var(--dark);
   color: #fef3c7;
   text-align: center;
   padding: 30px 15px;
@@ -299,7 +364,7 @@ footer strong {
   }
 
   nav a {
-    background: #f8f5f0;
+    background: var(--cream);
     padding: 8px 10px;
     border-radius: 8px;
     font-size: 14px;
@@ -328,7 +393,9 @@ footer strong {
   }
 
   .products,
-  .features {
+  .features,
+  .dashboard-grid,
+  .category-grid {
     grid-template-columns: 1fr;
   }
 
@@ -345,5 +412,9 @@ footer strong {
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .dashboard-card p {
+    font-size: 26px;
   }
 }
